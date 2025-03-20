@@ -27,10 +27,11 @@ app.use(session({
     }
 }));
 
-// Flash messages middleware
+// Flash messages and user middleware
 app.use((req, res, next) => {
     res.locals.success_msg = req.session.success_msg;
     res.locals.error_msg = req.session.error_msg;
+    res.locals.user = req.session.user || null;
     delete req.session.success_msg;
     delete req.session.error_msg;
     next();
