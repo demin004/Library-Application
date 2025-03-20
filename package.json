@@ -1,0 +1,21 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "description": "A comprehensive library management system",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ejs": "^3.1.9",
+    "sqlite3": "^5.1.6",
+    "bcryptjs": "^2.4.3",
+    "express-session": "^1.17.3",
+    "connect-sqlite3": "^0.9.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
