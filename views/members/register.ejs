@@ -1,0 +1,244 @@
+<%- include('../partials/header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0">
+                    <i class="fas fa-user-plus me-2"></i>Register New Member
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="/members/register" method="POST" id="memberRegistrationForm">
+                    <!-- Name and Email -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="name" 
+                                       name="name" 
+                                       placeholder="Enter full name"
+                                       value="<%= typeof member != 'undefined' ? member.name : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" 
+                                       class="form-control" 
+                                       id="email" 
+                                       name="email" 
+                                       placeholder="Enter email address"
+                                       value="<%= typeof member != 'undefined' ? member.email : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phone and Address -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="phone" 
+                                       name="phone" 
+                                       placeholder="Enter phone number"
+                                       value="<%= typeof member != 'undefined' ? member.phone : '' %>"
+                                       required>
+                            </div>
+                            <div class="form-text">Format: +1234567890 or 0123-456-789</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="form-label">Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-home"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="address" 
+                                       name="address" 
+                                       placeholder="Enter address"
+                                       value="<%= typeof member != 'undefined' ? member.address : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="date_of_birth" class="form-label">Date of Birth</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <input type="date" 
+                                       class="form-control" 
+                                       id="date_of_birth" 
+                                       name="date_of_birth"
+                                       max="<%= new Date().toISOString().split('T')[0] %>"
+                                       value="<%= typeof member != 'undefined' ? member.date_of_birth : '' %>">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="membership_type" class="form-label">Membership Type</label>
+                            <select class="form-select" id="membership_type" name="membership_type" required>
+                                <option value="">Select membership type</option>
+                                <option value="standard">Standard</option>
+                                <option value="student">Student</option>
+                                <option value="senior">Senior Citizen</option>
+                                <option value="premium">Premium</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Emergency Contact -->
+                    <div class="mb-4">
+                        <h5 class="border-bottom pb-2">Emergency Contact</h5>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="emergency_contact_name" class="form-label">Contact Name</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="emergency_contact_name" 
+                                       name="emergency_contact_name" 
+                                       placeholder="Enter emergency contact name">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="emergency_contact_phone" class="form-label">Contact Phone</label>
+                                <input type="tel" 
+                                       class="form-control" 
+                                       id="emergency_contact_phone" 
+                                       name="emergency_contact_phone" 
+                                       placeholder="Enter emergency contact phone">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="mb-4">
+                        <div class="form-check">
+                            <input class="form-check-input" 
+                                   type="checkbox" 
+                                   id="terms" 
+                                   required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/members" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Members
+                        </a>
+                        <div>
+                            <button type="reset" class="btn btn-outline-danger me-2">
+                                <i class="fas fa-undo me-2"></i>Reset
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus me-2"></i>Register Member
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Library Membership Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Membership Rules</h6>
+                <p>Members must follow library rules and regulations regarding book borrowing, returns, and conduct within the library premises.</p>
+                
+                <h6>2. Borrowing Privileges</h6>
+                <p>Members are responsible for all materials borrowed under their account and must return them by the due date.</p>
+                
+                <h6>3. Fees and Charges</h6>
+                <p>Members agree to pay any applicable late fees, damage charges, or replacement costs for lost items.</p>
+                
+                <h6>4. Personal Information</h6>
+                <p>Members must keep their contact information up to date and notify the library of any changes.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom JavaScript for form validation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('memberRegistrationForm');
+    const phoneInput = document.getElementById('phone');
+    const emailInput = document.getElementById('email');
+
+    // Phone number validation
+    phoneInput.addEventListener('input', function() {
+        const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+        if (!phoneRegex.test(this.value)) {
+            this.classList.add('is-invalid');
+        } else {
+            this.classList.remove('is-invalid');
+        }
+    });
+
+    // Email validation
+    emailInput.addEventListener('input', function() {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(this.value)) {
+            this.classList.add('is-invalid');
+        } else {
+            this.classList.remove('is-invalid');
+        }
+    });
+
+    // Form submission validation
+    form.addEventListener('submit', function(e) {
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+
+    // Date of birth validation
+    const dobInput = document.getElementById('date_of_birth');
+    dobInput.addEventListener('input', function() {
+        const selectedDate = new Date(this.value);
+        const today = new Date();
+        if (selectedDate > today) {
+            this.setCustomValidity('Date of birth cannot be in the future');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+});
+</script>
+
+<%- include('../partials/footer') %>
