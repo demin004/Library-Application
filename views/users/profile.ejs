@@ -1,0 +1,126 @@
+<%- include('../partials/header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0"><i class="fas fa-user-circle me-2"></i>User Profile</h4>
+                    <a href="/users/edit-profile" class="btn btn-light btn-sm">
+                        <i class="fas fa-edit me-1"></i>Edit Profile
+                    </a>
+                </div>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <!-- User Info Section -->
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2"><i class="fas fa-info-circle me-2"></i>Basic Information</h5>
+                            <div class="ms-4">
+                                <p class="mb-2">
+                                    <strong>Username:</strong>
+                                    <span class="ms-2"><%= user.username %></span>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Email:</strong>
+                                    <span class="ms-2"><%= user.email %></span>
+                                </p>
+                                <p class="mb-2">
+                                    <strong>Account Created:</strong>
+                                    <span class="ms-2"><%= new Date(user.created_at).toLocaleDateString() %></span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2"><i class="fas fa-shield-alt me-2"></i>Security</h5>
+                            <div class="ms-4">
+                                <p class="mb-2">
+                                    <strong>Last Login:</strong>
+                                    <span class="ms-2">
+                                        <%= new Date().toLocaleDateString() %> <%= new Date().toLocaleTimeString() %>
+                                    </span>
+                                </p>
+                                <div class="mt-3">
+                                    <a href="/users/change-password" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-key me-1"></i>Change Password
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Activity Summary Section -->
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2"><i class="fas fa-chart-line me-2"></i>Activity Summary</h5>
+                            <div class="list-group ms-4">
+                                <div class="list-group-item border-0">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-book me-2"></i>Books Registered</span>
+                                        <span class="badge bg-primary rounded-pill">0</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item border-0">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-users me-2"></i>Members Added</span>
+                                        <span class="badge bg-success rounded-pill">0</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item border-0">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span><i class="fas fa-exchange-alt me-2"></i>Transactions Processed</span>
+                                        <span class="badge bg-info rounded-pill">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5 class="border-bottom pb-2"><i class="fas fa-bell me-2"></i>Recent Activity</h5>
+                            <div class="list-group ms-4">
+                                <div class="list-group-item border-0 text-muted">
+                                    <i class="fas fa-info-circle me-2"></i>No recent activity to display
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Section -->
+                <div class="mt-4">
+                    <h5 class="border-bottom pb-2"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="/books/register" class="btn btn-outline-primary d-block">
+                                <i class="fas fa-book-medical mb-2 d-block fs-4"></i>
+                                Register Book
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="/members/register" class="btn btn-outline-success d-block">
+                                <i class="fas fa-user-plus mb-2 d-block fs-4"></i>
+                                Add Member
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="/borrowing/new" class="btn btn-outline-info d-block">
+                                <i class="fas fa-hand-holding-book mb-2 d-block fs-4"></i>
+                                New Borrowing
+                            </a>
+                        </div>
+                        <div class="col-md-3 col-sm-6 mb-3">
+                            <a href="/returns" class="btn btn-outline-warning d-block">
+                                <i class="fas fa-undo mb-2 d-block fs-4"></i>
+                                Process Return
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
