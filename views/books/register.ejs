@@ -1,0 +1,221 @@
+<%- include('../partials/header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0">
+                    <i class="fas fa-book-medical me-2"></i>Register New Book
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form action="/books/register" method="POST" id="bookRegistrationForm">
+                    <!-- ISBN and Title -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="isbn" class="form-label">ISBN</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-barcode"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="isbn" 
+                                       name="isbn" 
+                                       placeholder="Enter 13-digit ISBN"
+                                       pattern="\d{13}"
+                                       title="Please enter a valid 13-digit ISBN"
+                                       value="<%= typeof book != 'undefined' ? book.isbn : '' %>"
+                                       required>
+                            </div>
+                            <div class="form-text">Enter the 13-digit ISBN without hyphens</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="title" class="form-label">Title</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-book"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="title" 
+                                       name="title" 
+                                       placeholder="Enter book title"
+                                       value="<%= typeof book != 'undefined' ? book.title : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Author and Publisher -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="author" class="form-label">Author</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-user-edit"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="author" 
+                                       name="author" 
+                                       placeholder="Enter author name"
+                                       value="<%= typeof book != 'undefined' ? book.author : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="publisher" class="form-label">Publisher</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-building"></i>
+                                </span>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="publisher" 
+                                       name="publisher" 
+                                       placeholder="Enter publisher name"
+                                       value="<%= typeof book != 'undefined' ? book.publisher : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Publication Year and Copies -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="publication_year" class="form-label">Publication Year</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="publication_year" 
+                                       name="publication_year" 
+                                       placeholder="Enter publication year"
+                                       min="1900"
+                                       max="<%= new Date().getFullYear() %>"
+                                       value="<%= typeof book != 'undefined' ? book.publication_year : '' %>"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="total_copies" class="form-label">Number of Copies</label>
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="fas fa-copy"></i>
+                                </span>
+                                <input type="number" 
+                                       class="form-control" 
+                                       id="total_copies" 
+                                       name="total_copies" 
+                                       placeholder="Enter number of copies"
+                                       min="1"
+                                       value="<%= typeof book != 'undefined' ? book.total_copies : '1' %>"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description (Optional)</label>
+                        <textarea class="form-control" 
+                                  id="description" 
+                                  name="description" 
+                                  rows="3" 
+                                  placeholder="Enter book description"><%= typeof book != 'undefined' ? book.description : '' %></textarea>
+                    </div>
+
+                    <!-- Categories and Tags -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="category" class="form-label">Category</label>
+                            <select class="form-select" id="category" name="category">
+                                <option value="">Select a category</option>
+                                <option value="fiction">Fiction</option>
+                                <option value="non-fiction">Non-Fiction</option>
+                                <option value="reference">Reference</option>
+                                <option value="textbook">Textbook</option>
+                                <option value="children">Children's</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tags" class="form-label">Tags (Optional)</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="tags" 
+                                   name="tags" 
+                                   placeholder="Enter tags separated by commas"
+                                   value="<%= typeof book != 'undefined' ? book.tags : '' %>">
+                        </div>
+                    </div>
+
+                    <!-- Form Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/books" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Books
+                        </a>
+                        <div>
+                            <button type="reset" class="btn btn-outline-danger me-2">
+                                <i class="fas fa-undo me-2"></i>Reset
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Register Book
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom JavaScript for form validation -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('bookRegistrationForm');
+    const isbnInput = document.getElementById('isbn');
+    const yearInput = document.getElementById('publication_year');
+    const currentYear = new Date().getFullYear();
+
+    // ISBN validation
+    isbnInput.addEventListener('input', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value.length > 13) {
+            value = value.slice(0, 13);
+        }
+        this.value = value;
+        
+        if (value.length === 13) {
+            this.classList.remove('is-invalid');
+            this.classList.add('is-valid');
+        } else {
+            this.classList.remove('is-valid');
+            this.classList.add('is-invalid');
+        }
+    });
+
+    // Year validation
+    yearInput.addEventListener('input', function() {
+        const year = parseInt(this.value);
+        if (year < 1900 || year > currentYear) {
+            this.classList.add('is-invalid');
+        } else {
+            this.classList.remove('is-invalid');
+        }
+    });
+
+    // Form submission validation
+    form.addEventListener('submit', function(e) {
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>
+
+<%- include('../partials/footer') %>
