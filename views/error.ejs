@@ -1,0 +1,101 @@
+<%- include('partials/header') %>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="error-page my-5">
+            <% if (title.includes('404')) { %>
+                <!-- 404 Error -->
+                <div class="mb-4">
+                    <i class="fas fa-search fa-5x text-muted mb-4"></i>
+                    <h1 class="display-4 mb-3">404</h1>
+                    <h2 class="h4 text-muted mb-4">Page Not Found</h2>
+                    <p class="lead text-muted mb-4">
+                        The page you're looking for doesn't exist or has been moved.
+                    </p>
+                </div>
+            <% } else { %>
+                <!-- 500 Error -->
+                <div class="mb-4">
+                    <i class="fas fa-exclamation-triangle fa-5x text-danger mb-4"></i>
+                    <h1 class="display-4 mb-3">500</h1>
+                    <h2 class="h4 text-muted mb-4">Server Error</h2>
+                    <p class="lead text-muted mb-4">
+                        Something went wrong on our end. Please try again later.
+                    </p>
+                </div>
+            <% } %>
+
+            <!-- Error Details -->
+            <div class="alert alert-light">
+                <p class="mb-0"><strong>Error Details:</strong></p>
+                <p class="mb-0"><%= message %></p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-4">
+                <a href="javascript:history.back()" class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-arrow-left me-2"></i>Go Back
+                </a>
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home me-2"></i>Return Home
+                </a>
+            </div>
+
+            <!-- Help Section -->
+            <div class="mt-5">
+                <h5 class="text-muted mb-3">Need Help?</h5>
+                <p class="text-muted">
+                    If you continue to experience issues, please contact the system administrator or try the following:
+                </p>
+                <ul class="list-unstyled text-muted">
+                    <li><i class="fas fa-sync-alt me-2"></i>Refresh the page</li>
+                    <li><i class="fas fa-sign-in-alt me-2"></i>Try logging in again</li>
+                    <li><i class="fas fa-trash-alt me-2"></i>Clear your browser cache</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Error Page Styles -->
+<style>
+.error-page {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.error-page i {
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.error-page .btn {
+    transition: all 0.3s ease;
+}
+
+.error-page .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.error-page .list-unstyled li {
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.error-page .list-unstyled li:hover {
+    transform: translateX(5px);
+    color: #0d6efd !important;
+    cursor: pointer;
+}
+</style>
+
+<%- include('partials/footer') %>
